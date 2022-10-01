@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { update, list , get, deleteOne, findAllByProducts } from '../controllers/productLevelPrices.controller';
+import { update, list , get, deleteOne, findAllByProduct } from '../controllers/productLevelPrices.controller';
 
 class ProductLevelPricesRoutes {
   public router: Router = Router();
@@ -13,7 +13,7 @@ class ProductLevelPricesRoutes {
     this.router.post('/list',list);
     this.router.post('/get',get);
     this.router.post('/deleteOne',deleteOne);
-    this.router.post('/findAllByProducts',findAllByProducts);
+    this.router.post('/findAllByProduct',findAllByProduct);
   }
 
 }

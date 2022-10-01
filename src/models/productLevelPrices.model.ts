@@ -6,8 +6,8 @@ import { Level } from './level.model';
 */
 @modelOptions({
   schemaOptions: {
-    _id: false,
-  },
+    timestamps:true
+  }
 })
 export class ProductLevelPrice {
 

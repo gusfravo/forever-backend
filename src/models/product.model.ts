@@ -18,7 +18,7 @@ export class Product {
   @prop()
   ccUnit: Number;
 
-  @prop()
+  @prop({ required: true })
   status: boolean;
 
 }

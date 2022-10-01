@@ -39,7 +39,7 @@ export class App {
     this.app.use(indexRoutes);
     this.app.use('/api/level', levelRoutes);
     this.app.use('/api/product', productRoutes);
-    this.app.use('/api/productLevelPrices', productLevelPricesRoutes);
+    this.app.use('/api/productLevelPrice', productLevelPricesRoutes);
 
   }
   /**Metodo para inicirar el servidor.

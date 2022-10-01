@@ -19,7 +19,7 @@ export async function update(req: Request, res: Response){
     object.price = data.price;
     object.product = data.product._id;
     object.level = data.level._id;
-
+    console.log("::::::::",object);
     //Guardamos en BD el objecto
     await object.save();
 
@@ -32,9 +32,10 @@ export async function update(req: Request, res: Response){
     });
 
   }catch(e){
-    res.status(400);
+    console.log("[ERROR] -> productLevelPrices:update -> ",e);
+    res.status(500);
     return res.json({
-      code: "error:product:update:002",
+      code: "error:productLevelPrices:update:002",
       object:{},
       message:'Hubo un error verifique su información',
       transaction:'bad'
@@ -97,7 +98,7 @@ export async function list (req: Request, res: Response){
 
 /**Método para listar de precios por productos
 */
-export async function findAllByProducts (req: Request, res: Response){
+export async function findAllByProduct (req: Request, res: Response){
   try{
     const data = req.body;
     let instanceList = await ProductLevelPrices.find({patient:data.product._id}).populate('product',['id','name']).populate('level',['id','name']);
