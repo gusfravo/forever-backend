@@ -19,7 +19,6 @@ export async function update(req: Request, res: Response){
     object.price = data.price;
     object.product = data.product._id;
     object.level = data.level._id;
-    console.log("::::::::",object);
     //Guardamos en BD el objecto
     await object.save();
 
