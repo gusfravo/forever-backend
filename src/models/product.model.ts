@@ -1,4 +1,5 @@
-import { getModelForClass, modelOptions, prop, pre } from "@typegoose/typegoose";
+import { getModelForClass, modelOptions, prop , Severity, mongoose} from "@typegoose/typegoose";
+
 
 /**Se define la interfaz del doctor
 */
@@ -20,6 +21,9 @@ export class Product {
 
   @prop({ required: true })
   status: boolean;
+
+  @prop({ allowMixed: Severity.ALLOW })
+  prices?:never[];
 
 }
 

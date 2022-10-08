@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import Product from '../models/product.model';
+import ProductLevelPrices from '../models/productLevelPrices.model';
 
 /**Método para crear un producto
 */
@@ -75,12 +76,17 @@ export async function list (req: Request, res: Response){
   try{
     const data = req.body;
     let instanceList = await Product.find({}).limit(data.max).skip(data.max*data.page).sort({create_date:'asc'});
+    let instanceListAux = [];
+    for(let item of instanceList){
+      item.prices = await ProductLevelPrices.find({product:item._id}).populate('level',['id','name']);
+      instanceListAux.push(item);
+    }
     let total = await Product.countDocuments(instanceList);
     res.status(200);
     return res.json({
       code: "success:product:list:001",
       object:{
-        instanceList:instanceList,
+        instanceList:instanceListAux,
         total:total
       },
       message:'Registro obtenido exitosamente',
@@ -118,6 +124,39 @@ export async function deleteOne (req: Request, res: Response){
     res.status(400);
     return res.json({
       code: "error:product:deleteOne:002",
+      object:{},
+      message:'Hubo un error verifique su información',
+      transaction:'bad'
+    });
+  }
+}
+
+/**Método para listar los productos con paginado
+*/
+export async function searching (req: Request, res: Response){
+  try{
+    const data = req.body;
+    let search = data.filter.value;
+    let instanceList = await Product.find({name:new RegExp(search, "i")}).sort({create_date:'asc'});
+    let instanceListAux = [];
+    for(let item of instanceList){
+      item.prices = await ProductLevelPrices.find({product:item._id}).populate('level',['id','name']);
+      instanceListAux.push(item);
+    }
+    res.status(200);
+    return res.json({
+      code: "success:product:list:001",
+      object:{
+        instanceList:instanceListAux,
+      },
+      message:'Registro obtenido exitosamente',
+      transaction:'ok'
+    });
+  }catch(e){
+    console.log("[ERROR] -> product:searching -> ",e);
+    res.status(400);
+    return res.json({
+      code: "error:product:searching:002",
       object:{},
       message:'Hubo un error verifique su información',
       transaction:'bad'
