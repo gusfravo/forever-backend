@@ -100,7 +100,7 @@ export async function list (req: Request, res: Response){
 export async function findAllByProduct (req: Request, res: Response){
   try{
     const data = req.body;
-    let instanceList = await ProductLevelPrices.find({patient:data.product._id}).populate('product',['id','name']).populate('level',['id','name']);
+    let instanceList = await ProductLevelPrices.find({product:data.product._id}).populate('product',['id','name']).populate('level',['id','name']);
     res.status(200);
     return res.json({
       code: "success:product:list:001",
