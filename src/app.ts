@@ -7,6 +7,7 @@ import indexRoutes from "./routes/index.routes";
 import levelRoutes from './routes/level.routes';
 import productRoutes from './routes/product.routes';
 import productLevelPricesRoutes from './routes/productLevelPrices.routes';
+import saleRoutes from './routes/sale.routes';
 
 import './database';
 
@@ -40,6 +41,7 @@ export class App {
     this.app.use('/api/level', levelRoutes);
     this.app.use('/api/product', productRoutes);
     this.app.use('/api/productLevelPrice', productLevelPricesRoutes);
+    this.app.use('/api/sale', saleRoutes);
 
   }
   /**Metodo para inicirar el servidor.

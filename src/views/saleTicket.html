@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <style>
+        * {
+            font-size: 12px;
+            font-family: 'DejaVu Sans', serif;
+        }
+
+        h1 {
+            font-size: 18px;
+        }
+
+        .ticket {
+            margin: 2px;
+        }
+
+        td,
+        th,
+        tr,
+        table {
+            border-top: 1px solid black;
+            border-collapse: collapse;
+            margin: 0 auto;
+        }
+
+        td.precio {
+            text-align: right;
+            font-size: 11px;
+        }
+
+        td.cantidad {
+            font-size: 11px;
+        }
+
+        td.producto {
+            text-align: center;
+        }
+
+        th {
+            text-align: center;
+        }
+
+
+        .centrado {
+            text-align: center;
+            align-content: center;
+        }
+
+        .ticket {
+            width: 100%;
+            max-width: 100%;
+        }
+
+        img {
+            max-width: inherit;
+            width: inherit;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .ticket {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="ticket centrado">
+        <h1>TICKET AVELINA</h1>
+        <h2>Ticket de venta #{{folio}}</h2>
+        <h2>{{dateAux}}</h2>
+        <br><br>
+        <table>
+            <thead>
+                <tr class="centrado">
+                    <th class="cantidad">CANT</th>
+                    <th class="producto">PRODUCTO</th>
+                    <th class="precio">$$</th>
+                </tr>
+            </thead>
+            <tbody>
+              {{#products}}
+                    <tr>
+                        <td class="cantidad">{{quantity}}</td>
+                        <td class="producto">{{concept}}</td>
+                        <td class="precio">${{subtotal}}</td>
+                    </tr>
+              {{/products}}
+            </tbody>
+            <tr>
+                <td class="cantidad"></td>
+                <td class="producto">
+                    <strong>TOTAL</strong>
+                </td>
+                <td class="precio">
+                    ${{total}}
+                </td>
+            </tr>
+        </table>
+        <p class="centrado">¡GRACIAS POR SU COMPRA!</p>
+    </div>
+</body>
+
+</html>
