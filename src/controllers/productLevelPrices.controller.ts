@@ -148,3 +148,36 @@ export async function deleteOne (req: Request, res: Response){
     });
   }
 }
+
+/**
+ * Método para actualizar el precio de todos los productos
+ */
+
+export async function updateAllPrice (req: Request, res: Response){
+  try{
+    const data = req.body;
+    let instanceList = await ProductLevelPrices.find({});
+    for(let item of instanceList){
+      item.price = Math.round((item.price * 1.05) * 100) / 100;
+      await item.save();
+    }
+    res.status(200);
+    return res.json({
+      code: "success:product:updateAllPrice:001",
+      object:{
+        instanceList:instanceList,
+      },
+      message:'Registro obtenido exitosamente',
+      transaction:'ok'
+    });
+  }catch(e){
+    console.log("[ERROR] -> product:updateAllPrice -> ",e);
+    res.status(400);
+    return res.json({
+      code: "error:product:updateAllPrice:002",
+      object:{},
+      message:'Hubo un error verifique su información',
+      transaction:'bad'
+    });
+  }
+}
